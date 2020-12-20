@@ -56,6 +56,15 @@ todolistRouter.patch('/todos/:id/toggle-mark', async (req, res) => {
   });
 });
 
+todolistRouter.delete('/todos/:id', async (req, res) => {
+  const { id } = req.params;
+
+  await db.ref(`/todos/${id}`).set(null);
+  res.json({
+    statius: 'OK'
+  })
+});
+
 app.use('/api', todolistRouter);
 
 exports.todolist = functions.https.onRequest(app);
