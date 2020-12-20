@@ -12,13 +12,13 @@ app.use(bodyParser.json());
 
 const todolistRouter = express.Router();
 
-todolistRouter.get('/todos', async (req, res) => {
+todolistRouter.get('/', async (req, res) => {
   await db.ref('/todos').once('value').then((snapshot) => {
     res.json(snapshot.val());
   });
 });
 
-todolistRouter.get('/todos/:id', async (req, res) => {
+todolistRouter.get('/:id', async (req, res) => {
   await db.ref('/todos')
     .orderByKey()
     .equalTo(req.params.id)
@@ -28,7 +28,7 @@ todolistRouter.get('/todos/:id', async (req, res) => {
     });
 });
 
-todolistRouter.post('/todos', async (req, res) => {
+todolistRouter.post('/', async (req, res) => {
   const { todo } = req.body;
   const todoListsRef = db.ref('/todos');
   await todoListsRef.push({
@@ -41,7 +41,7 @@ todolistRouter.post('/todos', async (req, res) => {
   });
 });
 
-todolistRouter.patch('/todos/:id/toggle-mark', async (req, res) => {
+todolistRouter.patch('/:id/toggle-mark', async (req, res) => {
   const { id } = req.params;
 
   const data = (await db.ref('/todos')
@@ -56,6 +56,6 @@ todolistRouter.patch('/todos/:id/toggle-mark', async (req, res) => {
   });
 });
 
-app.use('/api', todolistRouter);
+app.use('/api/todos', todolistRouter);
 
 exports.todolist = functions.https.onRequest(app);
