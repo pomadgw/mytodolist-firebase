@@ -6,7 +6,8 @@
   "scripts": {
     "clean:ui": "rm -rfv build",
     "build": "npm run build:ui",
-    "build:ui": "cd ui && npm run build && cp -rv build .."
+    "install:ui": "cd ui && yarn install --frozen-lockfile && cd -",
+    "build:ui": "npm run install:ui && cd ui && npm run build && cp -rv build .."
   },
   "repository": {
     "type": "git",
