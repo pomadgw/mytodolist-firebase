@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const express = require('express');
 const bodyParser = require('body-parser');
 const firebase = require('firebase-admin');
+const cors = require('cors');
 
 firebase.initializeApp();
 
@@ -9,6 +10,13 @@ const db = firebase.database();
 
 const app = express();
 app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: '*',
+    optionsSuccessStatus: 200
+  })
+)
 
 const todolistRouter = express.Router();
 
