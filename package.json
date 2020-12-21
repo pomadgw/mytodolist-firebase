@@ -1,0 +1,21 @@
+{
+  "name": "mytodolist-firebase",
+  "version": "0.0.1",
+  "description": "Example on how to use a serverless tool",
+  "main": "index.js",
+  "scripts": {
+    "clean:ui": "rm -rfv build",
+    "build": "npm run build:ui",
+    "build:ui": "cd ui && npm run build && cp -rv build .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pomadgw/mytodolist-firebase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pomadgw/mytodolist-firebase/issues"
+  },
+  "homepage": "https://github.com/pomadgw/mytodolist-firebase#readme"
+}
