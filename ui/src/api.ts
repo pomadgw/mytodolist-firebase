@@ -16,5 +16,8 @@ export type Todolist = Todo[]
 export default {
   getTodos(): Promise<AxiosResponse<Todolist>> {
     return main.get('/api/todos');
+  },
+  createTodo(todo: string): Promise<AxiosResponse<Todolist>> {
+    return main.post('/api/todos', { todo });
   }
 }
