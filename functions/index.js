@@ -22,7 +22,7 @@ const todolistRouter = express.Router();
 
 todolistRouter.get('/', async (req, res) => {
   await db.ref('/todos').once('value').then((snapshot) => {
-    res.json(snapshot.val());
+    res.json(snapshot.val() || []);
   });
 });
 
