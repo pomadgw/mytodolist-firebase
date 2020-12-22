@@ -1,24 +1,43 @@
 <template>
-  <div>
-    {{ todo.todo }}
-    <input type="checkbox" :checked="todo.is_marked_done" />
+  <div class="border-2 px-4 py-3 rounded-md flex mb-3">
+    <div :class="isDone" class="flex-1">{{ todo.todo }}</div>
+    <div><input type="checkbox" v-model="todo.is_marked_done" /></div>
   </div>
 </template>
 
-<script type="ts">
-export default {
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import api, { Todo as TodoType } from '../api'
+
+export default defineComponent({
   name: 'Todo',
   props: {
     todo: {
       type: Object,
       required: true
+    },
+    id: {
+      type: String,
+      required: true
     }
   },
   setup(props) {
-    const { todo } = props;
-    console.log(props)
+    const todo = (props.todo) as TodoType;
 
-    return { todo }
+    const isDone = computed(() => {
+      if (todo.is_marked_done) {
+        return 'line-through text-gray-500'
+      }
+
+      return ''
+    })
+
+    return { todo, isDone }
+  },
+  watch: {
+    async 'todo.is_marked_done'() {
+      await api.toggleMarkTodo(this.id, this.todo.is_marked_done);
+    }
   }
-}
+})
 </script>

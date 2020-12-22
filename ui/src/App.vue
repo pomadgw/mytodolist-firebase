@@ -1,21 +1,25 @@
 <template>
-  <div>
-    <Todo v-for="(todo, idx) in todos" :key="idx" :todo="todo" />
-    <input v-model="newTodo" type="text" @keyup.enter="addTodo" />
+  <div class="flex flex-col mx-64 my-20">
+    <Todo v-for="(todo, idx) in todos" :key="idx" :id="idx" :todo="todo" />
+    <div class="flex">
+      <input placeholder="Fill a todo" class="flex-1 px-4 py-3 leading-5 border rounded-md" v-model="newTodo" type="text" @keyup.enter="addTodo" />
+    </div>
   </div>
 </template>
 
-<script type="ts">
-import api from './api'
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+import api, { Todo as TodoType } from './api'
 import Todo from './components/Todo.vue'
 
-export default {
+export default defineComponent({
   name: 'App',
   components: {
     Todo
   },
   data: () => ({
-    todos: [],
+    todos: [] as TodoType[],
     newTodo: ''
   }),
   async created() {
@@ -30,5 +34,5 @@ export default {
       await this.loadTodos();
     }
   },
-}
+})
 </script>

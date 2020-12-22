@@ -19,5 +19,8 @@ export default {
   },
   createTodo(todo: string): Promise<AxiosResponse<Todolist>> {
     return main.post('/api/todos', { todo });
-  }
+  },
+  toggleMarkTodo(id: string, is_marked_done: boolean): Promise<AxiosResponse<Todolist>> {
+    return main.patch(`/api/todos/${id}/toggle-mark`, { is_marked_done });
+  },
 }
