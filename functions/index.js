@@ -56,7 +56,7 @@ todolistRouter.patch('/:id/toggle-mark', async (req, res) => {
     .orderByKey()
     .equalTo(id)
     .once('value')).val()[id];
-  data.is_marked_done = !data.is_marked_done;
+  data.is_marked_done = Boolean(req.body.is_marked_done);
 
   await db.ref(`/todos/${id}`).set(data);
   res.json({
