@@ -33,15 +33,16 @@ export default defineComponent({
       return ''
     })
 
-    const deleteMe = () => {
-      alert(`TODO: delete me! ID: ${props.id}`)
-    }
-
-    return { todo, isDone, deleteMe }
+    return { todo, isDone }
   },
   watch: {
     async 'todo.is_marked_done'() {
       await api.toggleMarkTodo(this.id, this.todo.is_marked_done);
+    }
+  },
+  methods: {
+    deleteMe() {
+      this.$emit('delete', this.id)
     }
   }
 })
