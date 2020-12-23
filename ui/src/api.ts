@@ -23,4 +23,7 @@ export default {
   toggleMarkTodo(id: string, is_marked_done: boolean): Promise<AxiosResponse<Todolist>> {
     return main.patch(`/api/todos/${id}/toggle-mark`, { is_marked_done });
   },
+  deleteTodo(id: string) {
+    return main.delete(`/api/todos/${id}`)
+  }
 }

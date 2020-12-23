@@ -36,6 +36,12 @@ todolistRouter.get('/:id', async (req, res) => {
     });
 });
 
+todolistRouter.delete('/:id', async (req, res) => {
+  const todoListsRef = db.ref(`/todos/${req.params.id}`);
+  await todoListsRef.set(null)
+  res.json({ status: 'OK' })
+});
+
 todolistRouter.post('/', async (req, res) => {
   const { todo } = req.body;
   const todoListsRef = db.ref('/todos');
